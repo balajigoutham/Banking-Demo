@@ -2,7 +2,7 @@ resource "aws_instance" "test-server" {
   ami           = "ami-00ac45f3035ff009e" 
   instance_type = "t2.micro" 
   key_name = "jenkins"
-  vpc_security_group_ids= ["sg-06e7a45a6786ad282"]
+  vpc_security_group_ids= ["sg-0dcc909a5c3c320cb"]
   connection {
     type     = "ssh"
     user     = "ubuntu"
