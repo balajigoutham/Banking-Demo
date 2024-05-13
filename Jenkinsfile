@@ -25,19 +25,20 @@ pipeline {
             }
     stage('Create a Docker image from the Package Insure-Me.jar file') {
       steps {
-        sh 'docker build -t cbabu85/banking:1.0 .'
+        sh 'docker build -t balaji915/banking:1.0 .'
                     }
             }
     stage('Login to Dockerhub') {
-      steps {
-        withCredentials([usernamePassword(credentialsId: 'Dockerlogin-user', passwordVariable: 'dockerhubpass', usernameVariable: 'dockerhublogin')]) {  
-        sh 'docker login -u ${dockerhublogin} -p ${dockerhubpass}'
-                                                                    }
+     steps {
+				withCredentials([string(credentialsId: 'DOCKER_HUB_PASWD', variable: 'DOCKER_HUB_PASWD')]) {
+                sh 'docker login -u balaji915 -p ${DOCKER_HUB_PASWD}'
+                }
+			}
                                 }
             }
     stage('Push the Docker image') {
       steps {
-        sh 'docker push cbabu85/banking:1.0'
+        sh 'docker push balaji915/banking:1.0'
                                 }
             }
     stage('Create Infrastructure using terraform') {
