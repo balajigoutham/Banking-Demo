@@ -1,16 +1,16 @@
-- name : Configure Docker on test-server Instances
+- name : Configure Docker on EC2 Instances
   hosts : all
   become: true
   connection : ssh
   tasks : 
-  - name: Updating yum
-    command : sudo yum update
+  - name: updating apt
+    command : sudo apt-get update
 
   - name : Install Docker
-    command : sudo yum install docker -y
+    command : sudo apt-get install -y docker.io
 
   - name : Start Docker Service
     command : sudo systemctl start docker
 
-  - name : Run the Bank application
-    command: sudo docker run -dt -p 8085:8081 cbabu85/banking:1.0
+  - name: Deploy Docker Container
+    command: sudo docker run -dt -p 8085:8081 balaji915/banking:1.0
