@@ -28,14 +28,13 @@ pipeline {
         sh 'docker build -t balaji915/banking:1.0 .'
                     }
             }
-    stage('Login to Dockerhub') {
-     steps {
-				withCredentials([string(credentialsId: 'DOCKER_HUB_PASWD', variable: 'DOCKER_HUB_PASWD')]) {
-                sh 'docker login -u balaji915 -p ${DOCKER_HUB_PASWD}'
+    stage('Login2DockerHub') {
+      steps {
+	withCredentials([string(credentialsId: 'DOCKER_HUB_PASWD', variable: 'DOCKER_HUB_PASWD')]) {
+        sh 'docker login -u balaji915 -p ${DOCKER_HUB_PASWD}'}
                 }
-			}
-                                }
-            }
+			
+	}
     stage('Push the Docker image') {
       steps {
         sh 'docker push balaji915/banking:1.0'
