@@ -2,8 +2,7 @@ pipeline {
     agent any
     environment {
          DOCKER_HUB_CREDENTIALS = credentials('DOCKER_HUB_PASWD')
-         AWS_ACCESS_KEY_ID = credentials('AWS_ACCESS_KEY_ID')
-         AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
+        
     }
     
     stages {
