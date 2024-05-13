@@ -5,8 +5,8 @@ resource "aws_instance" "test-server" {
   vpc_security_group_ids= ["sg-06e7a45a6786ad282"]
   connection {
     type     = "ssh"
-    user     = "ec2-user"
-    private_key = file("./learnawskey.pem")
+    user     = "ubuntu"
+    private_key = file("./jenkins.pem")
     host     = self.public_ip
   }
   provisioner "remote-exec" {
