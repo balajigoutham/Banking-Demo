@@ -3,12 +3,17 @@ pipeline {
     tools{
       maven 'M2_HOME'
           }
+  environment {
+	  AWS_ACCESS_KEY_ID = credentials('AWS_ACCESS_KEY_ID')
+	  AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
+  }
+	  
  
    stages {
     stage('Git checkout') {
       steps {
          echo 'This is for cloning the gitrepo'
-         git branch: 'main', url: 'https://github.com/challadevops1/Banking-Demo.git'
+         git branch: 'main', url: 'https://github.com/balajigoutham/Banking-Demo.git'
                           }
             }
     stage('Create a Package') {
@@ -44,7 +49,7 @@ pipeline {
       steps {
             dir('scripts') {
             sh 'sudo chmod 600 learnawskey.pem'
-            withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'jenkinsIAMuser', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+            withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
             sh 'terraform init'
             sh 'terraform validate'
             sh 'terraform apply --auto-approve'
