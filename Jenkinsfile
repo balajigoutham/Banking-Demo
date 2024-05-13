@@ -46,8 +46,7 @@ pipeline {
         stage('Create Infrastructure using terraform') {
             steps {
                 dir('scripts') {
-                    sh 'sudo chmod 600 jenkins.pem'
-                    withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+                        sh 'sudo chmod 600 jenkins.pem'
                         sh 'terraform init'
                         sh 'terraform validate'
                         sh 'terraform apply --auto-approve'
